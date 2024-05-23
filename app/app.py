@@ -47,7 +47,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', class_name=class_name)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -61,7 +61,7 @@ def upload_file():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
         predicted_species = predict(file_path)
-        return render_template('index.html', prediction="Predicted Species: " + predicted_species, filename=filename)
+        return render_template('index.html', prediction="Predicted Species: " + predicted_species, filename=filename, class_name=class_name)
     else:
         return redirect(request.url)
 

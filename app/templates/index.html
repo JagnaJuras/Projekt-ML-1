@@ -7,14 +7,28 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Fish Species Classifier</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".png, .jpg, .jpeg" required>
-        <input type="submit" value="Upload">
-    </form>
-    {% if filename %}
-    <h2>{{ prediction }}</h2>
-    <img src="uploads/{{ filename }}" alt="{{ filename }}" style="max-width: 300px;">
-    {% endif %}
+    <div class="wrapper">
+        <div class="container">
+            <aside class="sidebar">
+                <h3>Available Fish Species:</h3>
+                <ul>
+                    {% for species in class_name %}
+                    <li>{{ species }}</li>
+                    {% endfor %}
+                </ul>
+            </aside>
+            <main class="content">
+                <h1>Fish Species Classifier</h1>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept=".png, .jpg, .jpeg" required>
+                    <input type="submit" value="Upload">
+                </form>
+                {% if filename %}
+                <h2>{{ prediction }}</h2>
+                <img src="uploads/{{ filename }}" alt="{{ filename }}" style="max-width: 300px;">
+                {% endif %}
+            </main>
+        </div>
+    </div>
 </body>
 </html>
